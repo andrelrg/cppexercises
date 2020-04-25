@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "essentials.h"
+#include "bigo.h"
 
 void enterbigo(){
 

@@ -7,50 +7,18 @@
 static struct termios old, current;
 
 /* Initialize new terminal i/o settings */
-void initTermios(int echo) 
-{
-  tcgetattr(0, &old); /* grab old terminal i/o settings */
-  current = old; /* make new settings same as old settings */
-  current.c_lflag &= ~ICANON; /* disable buffered i/o */
-  if (echo) {
-      current.c_lflag |= ECHO; /* set echo mode */
-  } else {
-      current.c_lflag &= ~ECHO; /* set no echo mode */
-  }
-  tcsetattr(0, TCSANOW, &current); /* use these new terminal i/o settings now */
-}
+void initTermios(int echo);
 
 /* Restore old terminal i/o settings */
-void resetTermios(void) 
-{
-  tcsetattr(0, TCSANOW, &old);
-}
+void resetTermios(void);
 
 /* Read 1 character - echo defines echo mode */
-char getch_(int echo) 
-{
-  char ch;
-  initTermios(echo);
-  ch = getchar();
-  resetTermios();
-  return ch;
-}
+char getch_(int echo);
 
 /* Read 1 character without echo */
-char getch(void) 
-{
-  return getch_(0);
-}
-
+char getch(void);
 /* Read 1 character with echo */
-char getche(void) 
-{
-  return getch_(1);
-}
+char getche(void);
 
-void gotoxy(int x,int y)    
-{
-    printf("%c[%d;%df",0x1B,y,x);
-}
-
+void gotoxy(int x,int y);
 #endif // HEADER_FLAG
