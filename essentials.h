@@ -48,4 +48,9 @@ char getche(void)
   return getch_(1);
 }
 
+void gotoxy(int x,int y)    
+{
+    printf("%c[%d;%df",0x1B,y,x);
+}
+
 #endif // HEADER_FLAG

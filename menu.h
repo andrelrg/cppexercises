@@ -1,10 +1,6 @@
 #ifndef SIMPLE_H
 #define SIMPLE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "essentials.h"
-
 int yLimUp = 3;
 int yLimDown;
 const int SECTIONSTART = 0;
@@ -14,11 +10,6 @@ typedef struct menu{
     int py;
     int section;
     int psection;
-
-    void gotoxy(int x,int y)    
-    {
-        printf("%c[%d;%df",0x1B,y,x);
-    }
 
     void start(){
         yLimDown = 5;
@@ -84,44 +75,21 @@ typedef struct menu{
         
     }
 
-    void enterbigo(){
-
-    }
-
     void enterstart(){
         menu::psection = 0;
         switch(py){
             case 3:
                 menu::section = 1;
+                yLimDown = 10;
+                header();
                 bigoMenu();
+                interaction();
                 break;
             case 4:
                 break;
             case 5:
                 break;
         }
-    }
-
-    void bigoMenu(){
-        yLimDown = 10;
-        header();
-        gotoxy(3,3);
-        printf("O(1)");
-        gotoxy(3,4);
-        printf("O(log n)");
-        gotoxy(3,5);
-        printf("O(n)");
-        gotoxy(3,6);
-        printf("O(n log n)");
-        gotoxy(3,7);
-        printf("O(n^2)");
-        gotoxy(3,8);
-        printf("O(n^3)");
-        gotoxy(3,9);
-        printf("O(2^n)");
-        gotoxy(3,10);
-        printf("O(n!)");
-        interaction();
     }
 
     void movep(int dir){
