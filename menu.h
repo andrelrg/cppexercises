@@ -7,10 +7,12 @@
 
 const int SECTIONSTART = 0;
 const int SECTIONBIGO = 1;
+const int SECTIONSOMEBIGO = 2;
 typedef struct menu{
     int py;
     int section;
     int psection;
+    void resetP();
     void start();
     void header();
     void startOptions();

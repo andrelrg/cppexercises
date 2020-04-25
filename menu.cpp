@@ -15,8 +15,13 @@ void Menu::header(){
     printf("Program to exercise some basic programming skills(w,a,s,d to navigate): ");
 }
 
+void Menu::resetP(){
+    py = 2;
+    movep(1);
+}
+
 void Menu::startOptions(){
-     gotoxy(3, 3);
+    gotoxy(3, 3);
     printf("Big O");
     gotoxy(3, 4);
     printf("Scalability");
@@ -26,8 +31,7 @@ void Menu::startOptions(){
 }
 
 void Menu::interaction(){
-     py = 2;
-    movep(1);
+    resetP();
     char c;
     while(true){
         c = getch();
@@ -53,6 +57,13 @@ void Menu::back(){
             case SECTIONSTART:
                 start();
                 break;
+            case SECTIONSOMEBIGO:
+                menu::psection = SECTIONBIGO;
+                yLimDown = 10;
+                header();
+                bigoMenu();
+                resetP();
+                break;
         }
 }
 
@@ -62,19 +73,21 @@ void Menu::enter(){
             enterstart();
             break;
         case SECTIONBIGO:
-            enterbigo();
+            menu::psection = SECTIONSOMEBIGO;
+            enterbigo(py);
             break;
     }
 }
+
 void Menu::enterstart(){
-    menu::psection = 0;
+    menu::psection = SECTIONSTART;
     switch(py){
         case 3:
-            menu::section = 1;
+            menu::section = SECTIONBIGO;
             yLimDown = 10;
             header();
             bigoMenu();
-            interaction();
+            resetP();
             break;
         case 4:
             break;
