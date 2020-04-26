@@ -112,6 +112,30 @@ void logarithimic(){
     printf("    - Binary search\n");
     printf("This function will find the index that has value 7 be executed using the first time an array of size %d and then one of size %d, both of them already sorted.\n\n", smallArraySize, bigArraySize);
 
+    std::cout << ""
+"    int binarySearch(const int arr[], const int size, int searchNumber){ \n"
+"        int half = size/2;\n"
+"\n"
+"        if (arr[half] == searchNumber){\n"
+"            return half;\n"
+"        } \n"
+"        else if (arr[half] > searchNumber){\n"
+"            int narr[half];\n"
+"            for (int a = 0; a<half; a++){\n"
+"                narr[a] = arr[a];\n"
+"            }\n"
+"            return binarySearch(narr, half, searchNumber);\n"
+"        } \n"
+"        else{\n"
+"            int narr[half];\n"
+"            for (int a = half; a<size; a++){\n"
+"                narr[a] = arr[a];\n"
+"            }\n"
+"            return binarySearch(narr, half, searchNumber);\n"
+"        } \n"
+"    }\n"
+""<<std::endl;
+
     std::chrono::steady_clock::time_point ts1 = std::chrono::steady_clock::now();
     binarySearch(sortedSmallArray, smallArraySize, 7);   
     std::chrono::steady_clock::time_point te1 = std::chrono::steady_clock::now();
@@ -136,11 +160,65 @@ void polynomic(){
 }
 
 void exponential(){
+    printf("O(2^n) Exponential time\n\n");
+    printf("O(2^n) It's algorithms that double it's running time for each new element.\n");
+    printf("  Some examples are:\n");
+    printf("    - Fibonacci\n");
+    printf("    - Power Set\n");
+    printf("This function will produce fibonacci numbers, first %d numbers, and then %d numbers.\n", smallArraySize, bigArraySize-20);
+    std::cout << ""
+"    int fibonacci(int n){\n"
+"        if (n <= 1){\n"
+"            return n;\n"
+"        }\n"
+"        return fibonacci(n-1) + fibonacci(n-2);\n"
+"    }\n"
+""<<std::endl;
 
+    std::chrono::steady_clock::time_point ts1 = std::chrono::steady_clock::now();
+    fibonacci(smallArraySize);
+    std::chrono::steady_clock::time_point te1 = std::chrono::steady_clock::now();
+    std::chrono::steady_clock::time_point ts2 = std::chrono::steady_clock::now();
+    fibonacci(bigArraySize-20);
+    std::chrono::steady_clock::time_point te2 = std::chrono::steady_clock::now();
+
+    std::cout << "First time: " << std::chrono::duration_cast<std::chrono::microseconds>(te1 - ts1).count() << "[µs]" 
+    " Second time: " << std::chrono::duration_cast<std::chrono::microseconds>(te2 - ts2).count() << "[µs]" << std::endl;
+
+    
 }
 
 void factorial(){
+    printf("O(n!) Factorial time\n\n");
+    printf("O(2^n) It's algorithms that do factorial expressions. So it grows factorially.\n");
+    printf("  Some examples are:\n");
+    printf("    - Permutations\n");
+    printf("This function will do permutations on a char array of %d positions and one of %d.\n", smallArraySize-5, bigArraySize-40);
+    std::cout << ""
+"    void permutation(std::string a, int start, int end){\n"
+"        if (start == end) std::cout<<a<<std::endl;  \n"
+"        else{   \n"
+"            for (int i = start; i <= end; i++)  \n"
+"            {   \n"
+"                std::swap(a[start], a[i]);  \n"
+"                permutation(a, start+1, end);  \n"
+"                std::swap(a[start], a[i]);  \n"
+"            }  \n"
+"        }  \n"
+"    }\n"
+""<<std::endl;
 
+    std::chrono::steady_clock::time_point ts1 = std::chrono::steady_clock::now();
+    permutation("abcde", 0, 4);
+    std::chrono::steady_clock::time_point te1 = std::chrono::steady_clock::now();
+    std::chrono::steady_clock::time_point ts2 = std::chrono::steady_clock::now();
+    permutation("abcdefghij", 0, 9);
+    std::chrono::steady_clock::time_point te2 = std::chrono::steady_clock::now();
+
+    std::cout << "First time: " << std::chrono::duration_cast<std::chrono::microseconds>(te1 - ts1).count() << "[µs]" 
+    " Second time: " << std::chrono::duration_cast<std::chrono::microseconds>(te2 - ts2).count() << "[µs]" << std::endl;
+
+    
 }
 
 void enterbigo(int py){
@@ -182,11 +260,11 @@ void bigoMenu(){
     gotoxy(3,5);
     printf("O(n)");
     gotoxy(3,6);
-    printf("O(n log n)");
+    printf("O(n log n) (Missing)");
     gotoxy(3,7);
     printf("O(n^2)");
     gotoxy(3,8);
-    printf("O(n^c)");
+    printf("O(n^c) (Missing)");
     gotoxy(3,9);
     printf("O(2^n)");
     gotoxy(3,10);

@@ -51,3 +51,23 @@ bool hasDuplicates(const int arr[], const int size){
     }
     return n > 0;
 }
+
+// Exponential O(2^n)
+int fibonacci(int n){
+    if (n <= 1){
+        return n;
+    }
+    return fibonacci(n-1) + fibonacci(n-2);
+}
+
+//Factorial O(n!)
+void permutation(std::string a, int start, int end){
+    if (start != end){
+        for (int i = start; i <= end; i++)  
+        {   
+            std::swap(a[start], a[i]);  
+            permutation(a, start+1, end);  
+            std::swap(a[start], a[i]);  
+        }  
+    }  
+}
