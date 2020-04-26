@@ -1,53 +1,47 @@
 #include "bigo.h"
 
-int lookIndex(int arr[], int index){
-    return arr[index];
-}
-void bigo1(){
-    printf("O(1) Constant Time");
+int const smallArraySize = 10;
+int const bigArraySize = 50;
+
+const int unsortedSmallArray[smallArraySize] = {2,4,1,3,7,6,8,9,10,5};
+const int sortedSmallArray[smallArraySize] = {1,2,3,4,5,6,20,8,9,10};
+const int unsortedBigArray[bigArraySize] = {50,44,24,1,37,15,7,9,27,42,33,46,6,13,32,48,29,31,8,22,25,38,19,14,12,17,11,43,23,35,39,45,40,16,5,49,26,21,2,34,4,3,47,30,36,20,18,28,10,41};
+const int sortedBigArray[bigArraySize] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50};
+
+void constant(){
+    printf("O(1) Constant Time\n\n");
     printf("O(1) It's algorithms that takes the same amount of time regardless of the size of the input.\n");
     printf("  Some examples are:\n");
     printf("    - Look for a especific index inside an array\n");
     printf("    - Print an especific element of an array.\n\n");
-    printf("This function will be executed using the first time an array of size 10 and then one of size 50, in both looking for the 7 index. It's expected that the time will be equivalent\n");
+    printf("This function will be executed using the first time an array of size %d and then one of size %d, in both looking for the 7 index. It's expected that the time will be equivalent\n", smallArraySize, bigArraySize);
 
     std::cout << ""
 "    int lookIndex(int arr[], int index){ \n"
 "        return arr[index]; \n"
 "    }\n"<<std::endl;
-
-    static int myArray[10] = {1,2,3,4,5,6,7,8,9,10};
-    static int myArray2[50] = {1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,28,9,10,1,2,3,4,5,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,28,9,10,1,2,3,41,5};
     
     std::chrono::steady_clock::time_point ts1 = std::chrono::steady_clock::now();
-    lookIndex(myArray, 7);
+    lookIndex(unsortedSmallArray, 7);
     std::chrono::steady_clock::time_point te1 = std::chrono::steady_clock::now();
 
     std::chrono::steady_clock::time_point ts2 = std::chrono::steady_clock::now();
-    lookIndex(myArray2, 7);
+    lookIndex(unsortedBigArray, 7);
     std::chrono::steady_clock::time_point te2 = std::chrono::steady_clock::now();
 
     std::cout << "First time: " << std::chrono::duration_cast<std::chrono::microseconds>(te1 - ts1).count() << "[µs]" 
     " Second time: " << std::chrono::duration_cast<std::chrono::microseconds>(te2 - ts2).count() << "[µs]" << std::endl;
 }
 
-int maxUnsorted(int arr[], int size){
-    int max = -99;
-    for(int i = 0; i<size; i++){
-        if (arr[i] > max){
-            max = arr[i];
-        }
-    }
-    return max;
-}
 
-void bigo2(){
-    printf("O(n) Linear time");
+
+void linear(){
+    printf("O(n) Linear time\n\n");
     printf("O(n) It's algorithms that takes more time, the bigger input. \n");
     printf("  Some examples are:\n");
     printf("    - Get the max value in an array.\n");
     printf("    - Print all the values in an array.\n");
-    printf("This function will be executed using the first time an array of size 10 and then one of size 50.\n");
+    printf("This function will be executed using the first time an array of size %d and then one of size %d.\n", smallArraySize, bigArraySize);
 
 
         std::cout << ""
@@ -61,20 +55,91 @@ void bigo2(){
 "       return max;\n"
 "   }\n"
 ""<<std::endl;
-
-    static int myArray[10] = {1,2,3,4,5,6,20,8,9,10};
-    static int myArray2[50] = {1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,28,9,10,1,2,3,4,5,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,28,9,10,1,2,3,41,5};
     
     std::chrono::steady_clock::time_point ts1 = std::chrono::steady_clock::now();
-    maxUnsorted(myArray, 10);
+    maxUnsorted(unsortedSmallArray, smallArraySize);
     std::chrono::steady_clock::time_point te1 = std::chrono::steady_clock::now();
 
     std::chrono::steady_clock::time_point ts2 = std::chrono::steady_clock::now();
-    maxUnsorted(myArray2, 50);
+    maxUnsorted(unsortedBigArray, bigArraySize);
     std::chrono::steady_clock::time_point te2 = std::chrono::steady_clock::now();
 
     std::cout << "First time: " << std::chrono::duration_cast<std::chrono::microseconds>(te1 - ts1).count() << "[µs]" 
     " Second time: " << std::chrono::duration_cast<std::chrono::microseconds>(te2 - ts2).count() << "[µs]" << std::endl;
+
+}
+
+
+
+void quadratic(){
+    printf("O(n^2) Quadratic time\n\n");
+    printf("O(n^2) It's algorithms that will grow in n^2 rate, basically if the input has a 2 size it will do 4 opperations, and if it has a 8 size it will do 64 opperations. \n");
+    printf("  Some examples are:\n");
+    printf("    - Check for duplicated values in an array.\n");
+    printf("    - Sort elements (bubble sort, etc).\n");
+    printf("This function will be executed using the first time an array of size %d and then one of size %d.\n", smallArraySize, bigArraySize);
+
+std::cout << ""
+"    bool hasDuplicates(int arr[], int size){\n"
+"        int n = 0;\n"
+"        for (int a=0; a < size; a++){\n"
+"            for (int b=0; b < size; b++){\n"
+"                if (a == b) continue;\n"
+"                if (arr[a] == arr[b]) n++;\n"
+"            }\n"
+"        }\n"
+"        return n > 0;\n"
+"    }\n\n"
+""<<std::endl;
+
+    std::chrono::steady_clock::time_point ts1 = std::chrono::steady_clock::now();
+    hasDuplicates(unsortedSmallArray, smallArraySize);    
+    std::chrono::steady_clock::time_point te1 = std::chrono::steady_clock::now();
+    std::chrono::steady_clock::time_point ts2 = std::chrono::steady_clock::now();
+    hasDuplicates(unsortedBigArray, bigArraySize);        
+    std::chrono::steady_clock::time_point te2 = std::chrono::steady_clock::now();
+    std::cout << "First time: " << std::chrono::duration_cast<std::chrono::microseconds>(te1 - ts1).count() << "[µs]" 
+    " Second time: " << std::chrono::duration_cast<std::chrono::microseconds>(te2 - ts2).count() << "[µs]" << std::endl;
+    
+}
+
+
+
+void logarithimic(){
+    printf("O(log n) Logarithmic time\n\n");
+    printf("O(log n) It's algorithms that in every iteration divide the problem in half\n");
+    printf("  Some examples are:\n");
+    printf("    - Binary search\n");
+    printf("This function will find the index that has value 7 be executed using the first time an array of size %d and then one of size %d, both of them already sorted.\n\n", smallArraySize, bigArraySize);
+
+    std::chrono::steady_clock::time_point ts1 = std::chrono::steady_clock::now();
+    binarySearch(sortedSmallArray, smallArraySize, 7);   
+    std::chrono::steady_clock::time_point te1 = std::chrono::steady_clock::now();
+    std::chrono::steady_clock::time_point ts2 = std::chrono::steady_clock::now();
+    binarySearch(sortedBigArray, bigArraySize, 7);
+    std::chrono::steady_clock::time_point te2 = std::chrono::steady_clock::now();
+    std::cout << "First time: " << std::chrono::duration_cast<std::chrono::microseconds>(te1 - ts1).count() << "[µs]" 
+    " Second time: " << std::chrono::duration_cast<std::chrono::microseconds>(te2 - ts2).count() << "[µs]" << std::endl;
+
+}
+
+void linearithmic(){
+    printf("O(n log n) Logarithmic time\n\n");
+    printf("O(log n) It's algorithms that in every iteration divide the problem in half\n");
+    printf("  Some examples are:\n");
+    printf("    - Binary search\n");
+    printf("This function will sort an array of size %d and then an array of size %d", smallArraySize, bigArraySize);
+}
+
+void polynomic(){
+
+}
+
+void exponential(){
+
+}
+
+void factorial(){
 
 }
 
@@ -83,28 +148,28 @@ void enterbigo(int py){
     gotoxy(0,0);
     switch(py){
         case BIGO_1:
-            bigo1();
+            constant();
             break;
         case BIGO_2:
-            bigo2();
+            logarithimic();
             break;
         case BIGO_3:
-            printf("BIGO_3");
+            linear();
             break;
         case BIGO_4:
-            printf("BIGO_4");
+            linearithmic();
             break;
         case BIGO_5:
-            printf("BIGO_5");
+            quadratic();
             break;
         case BIGO_6:
-            printf("BIGO_6");
+            polynomic();
             break;
         case BIGO_7:
-            printf("BIGO_7");
+            exponential();
             break;
         case BIGO_8:
-            printf("BIGO_8");
+            factorial();
             break;
     }
 }
@@ -121,7 +186,7 @@ void bigoMenu(){
     gotoxy(3,7);
     printf("O(n^2)");
     gotoxy(3,8);
-    printf("O(n^3)");
+    printf("O(n^c)");
     gotoxy(3,9);
     printf("O(2^n)");
     gotoxy(3,10);

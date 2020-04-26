@@ -6,6 +6,7 @@
 #include <chrono>
 #include <iterator>
 #include "essentials.h"
+#include "bigofunctions.h"
 
 const int BIGO_1 = 3;
 const int BIGO_2 = 4;
