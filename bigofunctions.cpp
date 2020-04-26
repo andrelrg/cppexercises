@@ -1,10 +1,12 @@
 #include "bigofunctions.h"
 
-int lookIndex(const int arr[], const int index){ //Constant O(1)
+//Constant O(1)
+int lookIndex(const int arr[], const int index){ 
     return arr[index];
 }
 
-int binarySearch(const int arr[], const int size, int searchNumber){ //Logarithimic O(log(n))
+//Logarithimic O(log(n))
+int binarySearch(const int arr[], const int size, int searchNumber){ 
     int half = size/2;
 
     if (arr[half] == searchNumber){
@@ -26,7 +28,8 @@ int binarySearch(const int arr[], const int size, int searchNumber){ //Logarithi
     } 
 }
 
-int maxUnsorted(const int arr[], const int size){ //Linear O(n)
+//Linear O(n)
+int maxUnsorted(const int arr[], const int size){ 
     int max = -99;
     for(int i = 0; i<size; i++){
         if (arr[i] > max){
@@ -37,8 +40,8 @@ int maxUnsorted(const int arr[], const int size){ //Linear O(n)
 }
 
 
-
-bool hasDuplicates(const int arr[], const int size){ // Quadratic O(n^2)
+// Quadratic O(n^2)
+bool hasDuplicates(const int arr[], const int size){ 
     int n = 0;
     for (int a=0; a < size; a++){
         for (int b=0; b < size; b++){

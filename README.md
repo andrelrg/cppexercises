@@ -12,4 +12,4 @@ A menu that `will` contain couple of options to find code examples of some progr
 ### Big O
 The first section of this study project is some explatation and some examples of all the types of algorithms complexyties.<br>
 If you want to see the examples go to the `bigofunctions.cpp` file, and you will see all the functions.<br>
-Executing the program you have a small explanation of each one of them
+Executing the program you have a small explanation of each one of them.
